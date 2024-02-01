@@ -1,15 +1,15 @@
 from django import forms
-from .models import Article, Comment
+from .models import Article
+from django_summernote.widgets import SummernoteWidget
 
 class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ["title", "content", "image"]
+        fields = ["title", "content"]
 
-class CommentForm(forms.ModelForm):
+class ArticleForm(forms.ModelForm):
     class Meta:
-        model = Comment
-        fields = [
-            "content",
-        ]
+        model = Article
+        fields = ['title', 'content']
 
+    content = forms.CharField(widget=SummernoteWidget())

@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block content %}
+<form action="" method="POST">
+  {% csrf_token %}
+  <div class="card">
+    <div class="card-header">{{ form.title }}</div>
+    <div>{{ form.content }}</div>
+  </div>
+
+  <div class="text-right">
+    <button type="submit" id="write">작성하기</button>
+  </div>
+</form>
+{% endblock %}

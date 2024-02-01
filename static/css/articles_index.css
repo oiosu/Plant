@@ -1,3 +1,7 @@
-table {
-  margin-top: 500px;
+.index_content {
+  margin-top: 300px;
+  margin-bottom: 300px;
+}
+.index_text {
+  margin-bottom: 300px;
 }

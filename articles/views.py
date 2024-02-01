@@ -3,8 +3,8 @@ from django.views.decorators.http import require_safe
 from django.contrib.auth.decorators import login_required
 from .models import Article
 from .forms import ArticleForm
-from .forms import CommentForm
 from django.contrib import messages
+
 
 # Create your views here.
 @require_safe
@@ -13,6 +13,8 @@ def index(request):
     context = {"articles":articles}
     return render(request, "articles/index.html", context)
 
+def new(request):
+    return render(request, "articles/new.html")
 
 @login_required
 def create(request):
@@ -33,13 +35,17 @@ def create(request):
 @login_required
 def detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
-    comment_form = CommentForm()
     context = {
         "article": article,
-        "comments": article.comment_set.all(),
-        "comment_form": comment_form,
     }
     return render(request, "articles/detail.html", context)
+
+
+@login_required
+def edit(request, pk):
+    article = Article.objects.get(Article, pk=pk)
+    context = {"article":article}
+    return render(request, "articles/edit.html", context)
 
 
 @login_required
@@ -59,31 +65,6 @@ def update(request, pk):
     else:
         messages.warning(request, "작성자만 수정할 수 있습니다.")
         return redirect("articles:detail", article.pk)
-    
-@login_required
-def comment_create(request, pk):
-    article = Article.objects.get(pk=pk)
-    comment_form = CommentForm(request.POST)
-    if comment_form.is_valid():
-        comment = comment_form.save(commit=False)
-        comment.article = article
-        comment.user = request.user
-        comment.save()
-    return redirect("articles:detail", article.pk)
-
-
-@login_required
-def like(request, pk):
-    article = get_object_or_404(Article, pk=pk)
-    is_liked = False
-    if request.user in article.like_users.all():
-        article.like_users.remove(request.user)
-        is_liked = False
-    else:  
-        article.like_users.add(request.user)
-        is_liked = True
-        context = {"isLiked": is_liked, "likeCount": article.like_users.count()}
-    return redirect("articles:detail", article.pk, context)
 
 
 def delete(request, pk):
@@ -93,3 +74,4 @@ def delete(request, pk):
         return redirect("articles:index")
     context = {"article": article}
     return render(request, "articles/detail.html", context)
+
