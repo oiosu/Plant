@@ -12,10 +12,8 @@ class Article(models.Model):
     image = ProcessedImageField(
         upload_to="images/",
         blank=True,
-        # 처리할 작업 목록
         processors=[ResizeToFill(1200, 960)],
         format="JPEG",
-        # 최종 저장 포맷
         options={"quality": 80},
     )
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -23,7 +21,7 @@ class Article(models.Model):
         settings.AUTH_USER_MODEL, related_name="like_articles"
     )
 
-class Comment(models.Model):
+class Comment(models.Model):    
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
