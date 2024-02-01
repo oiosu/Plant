@@ -4,4 +4,27 @@
     <a href="{% url 'articles:new' %}">반려식물 자랑하기</a>
   </div>
 </div>
+
+<div class="index_table">
+  <table>
+    <thead>
+      <tr class="text-center">
+        <th>제목</th>
+        <th>작성자</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if index %} {% for articles in index %}
+      <tr class="text-center">
+        <td>{{ articles.title|truncatechars:30 }}</td>
+        <td>{{ articles.user }}</td>
+      </tr>
+      {% endfor %} {% else %}
+      <tr class="text-center">
+        <td colspan="5">작성된 게시글이 없습니다.</td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}
