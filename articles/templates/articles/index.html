@@ -1,3 +1,31 @@
 {% extends 'base.html' %} {% block content %}
-<h2>게시글 목록 test</h2>
+<div class="index_content">
+  <table>
+    <thead>
+      <tr class="text-center">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>등록일</th>
+        <th>조회수</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if notice_list %} {% for notice in notice_list %}
+      <tr class="text-center">
+        <td>{{ notice.id }}</td>
+        <td>{{ notice.title|truncatechars:30 }}</td>
+        <td>{{ notice.writer }}</td>
+        <td>{{ notice.registered_date|date:'Y. m. d' }}</td>
+        <td>{{ notice.hits }}</td>
+      </tr>
+      {% endfor %} {% else %}
+      <tr class="text-center">
+        <td colspan="5">작성된 게시글이 없습니다.</td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+
 {% endblock %}
