@@ -75,17 +75,15 @@ def comment_create(request, pk):
 @login_required
 def like(request, pk):
     article = get_object_or_404(Article, pk=pk)
-    # 만약 로그인한 유저(request.user)가 이 글을 좋아요 눌렀다면,
+    is_liked = False
     if request.user in article.like_users.all():
-        # 좋아요 삭제하고
         article.like_users.remove(request.user)
         is_liked = False
-    else:  # 좋아요 누르지 않은 상태라면 좋아요에 추가하고
+    else:  
         article.like_users.add(request.user)
         is_liked = True
-        # 상세 페이지로 redirect
         context = {"isLiked": is_liked, "likeCount": article.like_users.count()}
-    return redirect("articles:detail", article.pk)
+    return redirect("articles:detail", article.pk, context)
 
 
 def delete(request, pk):

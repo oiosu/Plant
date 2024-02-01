@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Sukyung" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <!-- articles -->
+    <link rel="stylesheet" href="{% static 'css/articles_index.css' %}" />
+
 
 
     <!-- Google Icon -->
@@ -23,7 +26,7 @@
         <div class="menu">
           <p class="menu_list">반려식물 찾기</p>
           <p class="menu_list">
-            전국식물자랑
+            <a href={% url 'articles:index' %}>전국식물자랑</a>
           </p>
           <p class="menu_list">스토어</p>
         </div>
