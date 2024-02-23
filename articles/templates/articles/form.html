@@ -7,7 +7,7 @@ request.resolver_match.url_name == 'create' %}
 {% endif %}
 
 <form>
-  {% csrf_token %} {% bootstrap_form article_form %} {% bootstrap_button
-  button_type="submit" content="OK" %}
+  {% csrf_token %} {% form article_form %} {% button button_type="submit"
+  content="OK" %}
 </form>
 {% endblock %}
