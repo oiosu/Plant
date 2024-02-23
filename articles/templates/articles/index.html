@@ -15,15 +15,15 @@
       </tr>
     </thead>
     <tbody>
-      {% if index %} {% for articles in index %}
+      {% if index %} {% for article in index %}
       <tr class="text-center">
         <td>{{ user.pk }}</td>
-        <td>{{ articles.title|truncatechars:30 }}</td>
-        <td>{{ articles.user }}</td>
+        <td>{{ article.title|truncatechars:30 }}</td>
+        <td>{{ article.user }}</td>
       </tr>
       {% endfor %} {% else %}
       <tr class="text-center">
-        <td colspan="5">작성된 게시글이 없습니다.</td>
+        <td colspan="3">작성된 게시글이 없습니다.</td>
       </tr>
       {% endif %}
     </tbody>

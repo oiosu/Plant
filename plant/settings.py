@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'imagekit',
     'django_summernote',
     'accounts',
+    
 ]
 
 SUMMERNOTE_CONFIG = {

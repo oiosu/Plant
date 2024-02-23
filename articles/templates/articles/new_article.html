@@ -1,13 +1,13 @@
 {% extends 'base.html' %} {% block content %}
 <div class="new_content">
-  <form method="post" action="{% url 'articles:index' %}">
+  <form method="post" action="{% url 'articles:list' %}">
     {% csrf_token %}
     <label for="title">글 제목:</label>
     <input type="text" name="title" id="title" maxlength="255" required />
     <div class="header">{{ articles.title }}</div>
     <div class="new_summernote" id="summernote"></div>
     <button type="submit">
-      <a href="{% url 'articles:index' %}">나의 반려동물 자랑 글 등록하기</a>
+      <a href="{% url 'articles:list' %}">나의 반려동물 자랑 글 등록하기</a>
     </button>
   </form>
 
@@ -27,5 +27,5 @@
       ],
     });
   </script>
-  {% endblock %}
 </div>
+{% endblock %}

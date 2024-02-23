@@ -11,56 +11,57 @@
     <!-- articles -->
     <link rel="stylesheet" href="{% static 'css/articles_index.css' %}" />
     <link rel="stylesheet" href="{% static 'css/articles_new.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/articles_list.css' %}" />
     <!-- note -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
+      rel="stylesheet"
+    />
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
-
-
     <!-- Google Icon -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-   
-    <title>🪴Plant</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
 
+    <title>🪴Plant</title>
   </head>
   <body>
     <!-- Header -->
     <header id="mainHeader">
       <div class="menu_section">
-        <div class="logo"><a href={% url 'main' %}>PLANT</a></div>
+        <div class="logo"><a href="{% url 'main' %}">PLANT</a></div>
         <div class="menu">
           <p class="menu_list">반려식물 찾기</p>
           <p class="menu_list">
-            <a href={% url 'articles:index' %}>전국식물자랑</a>
+            <a href="{% url 'article_list' %}">전국식물자랑</a>
           </p>
           <p class="menu_list">스토어</p>
         </div>
-
       </div>
 
       <!-- Nav -->
       <div class="nav">
         {% if user.is_authenticated %}
-        <p class="welcome_msg">Welcome! username!</p>
-        <p><a href="">로그아웃</a></p>
-        <p class="page1"><a href="">마이페이지</a></p>
+        <p class="welcome_msg">Welcome! {{ user.username }}!</p>
+        <p>로그아웃</p>
+        <p class="page1">마이페이지</p>
         {% else %}
         <p></p>
-        <p><a href="">로그인</a></p>
-        <p class="page2"><a href="">회원가입</a></p>
+        <p>로그인</p>
+        <p class="page2">회원가입</p>
         {% endif %}
       </div>
     </header>
 
-    <div class="block_content">
-      
-    {% block content %}
+    <div class="block_content">{% block content %} {% endblock content %}</div>
 
-    {% endblock content %} 
-
-    </div>
-    
     <!-- footer -->
     <div class="bottom">
       <div class="footer_contact">
@@ -68,17 +69,14 @@
         <div class="footer_text">
           <p>email : plant@email.com</p>
           <p>tell : 070-0000-0000 (11:00 am - 18:00 / 토,일,공휴일 휴무)</p>
-          <p>@2024. PLANT corp. all rights reserevd. Django FullStack.</p>
+          <p>@2024. PLANT corp. all rights reserved. Django FullStack.</p>
         </div>
       </div>
     </div>
   </body>
   <script>
     $(document).ready(function () {
-      $('#id_content').summernote();
+      $("#id_content").summernote();
     });
   </script>
-
 </html>
-
-

@@ -6,10 +6,7 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = ["title", "content"]
+        widgets = {
+            'content' : SummernoteWidget(),
+        }
 
-class ArticleForm(forms.ModelForm):
-    class Meta:
-        model = Article
-        fields = ['title', 'content']
-
-    content = forms.CharField(widget=SummernoteWidget())
