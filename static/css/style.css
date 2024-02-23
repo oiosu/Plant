@@ -84,7 +84,7 @@ header {
 
 .logo a {
   text-decoration: none;
-  color: #fff;
+  color: #c7ea46;
 }
 
 .menu {
@@ -174,6 +174,7 @@ header {
   border-radius: 20px;
   margin-left: 40px;
   margin-right: 10px;
+  z-index: -1;
 }
 
 /* user_card */
@@ -184,7 +185,8 @@ header {
   align-items: center;
   justify-content: center;
 
-  position: absolute;
+  position: relative;
+  z-index: 10;
 }
 .user_content {
   width: 380px;
@@ -195,11 +197,14 @@ header {
   margin-top: -80px;
   margin-left: 50px;
   margin-right: 25px;
-  z-index: 2;
+  position: relative;
+  z-index: 10;
 }
 .user_name {
   margin-top: 15px;
   margin-left: 20px;
+  position: relative;
+  z-index: 10;
 }
 
 /* togethers section */
