@@ -1,0 +1,7 @@
+{% extends 'base.html' %} {% block content %}
+<h1>비밀번호 변경</h1>
+<form action="{% url 'accounts:change_pw' %}" method="POST">
+  {% csrf_token %}
+  <button type="submit">비밀번호 수정완료</button>
+</form>
+{% endblock %}
