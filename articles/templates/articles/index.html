@@ -1,32 +1,19 @@
 {% extends 'base.html' %} {% block content %}
-<div class="index_content">
-  <div class="index_text">
-    <a href="{% url 'articles:new' %}">반려식물 자랑하기</a>
-  </div>
+<div>
+  <button type="button"><a href="{% url 'articles:create' %}">now</a></button>
 </div>
 
-<div class="index_table">
-  <table>
-    <thead>
-      <tr class="text-center">
-        <th>번호</th>
-        <th>제목</th>
-        <th>작성자</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% if index %} {% for article in index %}
-      <tr class="text-center">
-        <td>{{ user.pk }}</td>
-        <td>{{ article.title|truncatechars:30 }}</td>
-        <td>{{ article.user }}</td>
-      </tr>
-      {% endfor %} {% else %}
-      <tr class="text-center">
-        <td colspan="3">작성된 게시글이 없습니다.</td>
-      </tr>
-      {% endif %}
-    </tbody>
-  </table>
+{% if request.user.is_authenticated %} {% endif %} {% for article in articles %}
+<div>
+  <div>
+    <div>
+      <div>
+        <a href="{% url 'articles:detail' article.pk %} ">{{ article.title}}</a>
+        <p>{{ article.created_at }}</p>
+      </div>
+      <p>{{ article.title }}</p>
+    </div>
+  </div>
+
+  {% endfor %} {% endblock %}
 </div>
-{% endblock %}

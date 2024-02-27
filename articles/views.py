@@ -1,70 +1,63 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.http import require_safe
-# from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Article
-from .forms import ArticleForm
-# from django.contrib import messages
-
+from articles.forms import ArticleForm 
 
 # Create your views here.
 
-def article_list(request):
-    articles = Article.objects.all()
-    return render(request, 'article_list.html', {'articles': articles})
-
-@require_safe
 def index(request):
-    articles = Article.objects.all()
-    context = {"articles":articles}
-    return render(request, "articles/index.html", context)
+    articles = Article.objects.order_by('-pk')
+    context = {
+        'articles':articles
+    }
+    return render(request, 'articles/index.html', context)
 
-def article_new(request):
-    return render(request, "articles/new_article.html")
-
-# @login_required
-def create_article(request):
-    if request.method == "POST":
-        form = ArticleForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('article_list')
+@login_required
+def create(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            article_form = ArticleForm(request.POST)
+            if article_form.is_valid():
+                article_form.save()
+                return redirect('articles:index')
+        else:
+            article_form = ArticleForm()
+        context = {
+            'article_form':article_form
+        }
+        return render(request, 'articles/forms.html', context)
     else:
-        form = ArticleForm()
-    return render(request, 'create_article.html', {'form': form})
+        return redirect('accounts:login')
 
-# @login_required
-def article_detail(request, pk):
-    article = get_object_or_404(Article, pk=pk)
-    return render(request, 'article_detail.html', {'article': article})
+def detail(request, pk):
+    article = Article.objects.get(pk=pk)
+    context = {
+        'article':article
+    }
+    return render(request, 'articles/detail.html', context)
 
-
-# @login_required
-def edit(request, pk):
-    article = get_object_or_404(Article, pk=pk)
-    context = {"article": article}
-    return render(request, "articles/edit.html", context)
-
-
-# @login_required
-def update_article(request, article_id):
-    article = get_object_or_404(Article, pk=article_id)
-
+@login_required
+def update(request, pk):
+    article = Article.objects.get(pk=pk)
     if request.method == 'POST':
-        form = ArticleForm(request.POST, instance=article)
-        if form.is_valid():
-            form.save()
-            return redirect('article_list')
+        article_form = ArticleForm(request.POST, instance=article)
+        if article_form.is_valid():
+            article_form.save()
+            return redirect('articles:index')
     else:
-        form = ArticleForm(instance=article)
+            # GET : Form을 제공
+        article_form = ArticleForm(instance=article)
+    context = {
+        'article_form': article_form
+    }
+    return render(request, 'articles/forms.html', context)
 
-    return render(request, 'update_article.html', {'form': form, 'article': article})
-
-
-def delete_article(request, article_id):
-    article = get_object_or_404(Article, pk=article_id)
-    if request.method == "POST":
+def delete(request, pk):
+    article = Article.objects.get(pk=pk)
+    if request.method == 'POST':
         article.delete()
-        return redirect("articles:index")
-    context = {"article": article}
-    return render(request, "articles/delete.html", context)
-
+        return redirect('articles:index')
+    context = {
+        'article':article
+    }
+    return render(request, 'articles/detail.html', context)

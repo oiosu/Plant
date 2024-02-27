@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block content %} {% if
+request.resolver_match.url_name == 'create' %}
+
+<h1 style="color: white">글쓰기</h1>
+{% else %}
+<h1 style="color: white" class="text-center">수정하기</h1>
+{% endif %}
+
+<form method="POST">
+  {% csrf_token %} {% article_form %} {% button_type="submit" content="OK" %}
+</form>
+{% endblock %}
