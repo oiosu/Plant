@@ -16,8 +16,13 @@ import json
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# from django.core.wsgi import get_wsgi_application
+
+# Build paths inside the project like this: BASE_DI R / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'plant.settings')
+# application = get_wsgi_application()
 
 
 # SECRET_KEY 숨기기 : secrets.json 불러오기 
@@ -54,29 +59,10 @@ INSTALLED_APPS = [
     'plant',
     'articles',
     'imagekit',
-    'django_summernote',
     'accounts',
     
 ]
 
-SUMMERNOTE_CONFIG = {
-    'iframe': False,
-    'summernote': {
-        'width': '100%',
-        'height': '480',
-        'toolbar': [
-            ['style', ['style']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['fontname', ['fontname']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['height', ['height']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'hr']],
-            ['view', ['fullscreen', 'codeview']],
-        ],
-    },
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -86,6 +72,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'imagekit.cachefiles.middleware.CachefilesMiddleware',
 ]
 
 ROOT_URLCONF = 'plant.urls'
