@@ -9,7 +9,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name="main/main.html"), name="main"),
     path("articles/", include("articles.urls")),
     path("accounts/", include("accounts.urls")),
-    path('summernote/', include('django_summernote.urls'))
+    # path('summernote/', include('django_summernote.urls')),
 ]
 
 if settings.DEBUG:

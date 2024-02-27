@@ -8,7 +8,7 @@ from articles.forms import ArticleForm
 def index(request):
     articles = Article.objects.order_by('-pk')
     context = {
-        'articles':articles
+        'articles': articles
     }
     return render(request, 'articles/index.html', context)
 
@@ -16,14 +16,16 @@ def index(request):
 def create(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            article_form = ArticleForm(request.POST)
-            if article_form.is_valid():
-                article_form.save()
+            form = ArticleForm(request.POST)
+            if form.is_valid():
+                article = form.save(commit=False)
+                article.user = request.user  # 오타 수정
+                article.save()
                 return redirect('articles:index')
         else:
             article_form = ArticleForm()
         context = {
-            'article_form':article_form
+            'article_form': article_form
         }
         return render(request, 'articles/forms.html', context)
     else:
@@ -32,7 +34,7 @@ def create(request):
 def detail(request, pk):
     article = Article.objects.get(pk=pk)
     context = {
-        'article':article
+        'article': article
     }
     return render(request, 'articles/detail.html', context)
 
@@ -45,7 +47,7 @@ def update(request, pk):
             article_form.save()
             return redirect('articles:index')
     else:
-            # GET : Form을 제공
+        # GET : Form을 제공
         article_form = ArticleForm(instance=article)
     context = {
         'article_form': article_form
@@ -58,6 +60,6 @@ def delete(request, pk):
         article.delete()
         return redirect('articles:index')
     context = {
-        'article':article
+        'article': article
     }
     return render(request, 'articles/detail.html', context)

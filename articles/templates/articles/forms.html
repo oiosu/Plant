@@ -1,9 +1,11 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>글쓰기</h1>
+<div class="forms_section">
+  <h1 style="color: white">글쓰기</h1>
+  <form method="POST">
+    {% csrf_token %} {{ article_form }}
+    <button type="submit">OK</button>
+  </form>
+</div>
 
-<form method="POST">
-  {% csrf_token %} {{ article_form }}
-  <button type="submit">OK</button>
-</form>
 {% endblock %}
