@@ -51,11 +51,13 @@
         {% if user.is_authenticated %}
         <p class="welcome_msg">Welcome! {{ user.username }}!</p>
         <p>로그아웃</p>
-        <p class="page1">마이페이지</p>
+        <p class="page1">
+          <a href="{% url 'accounts:detail' %}">마이페이지</a>
+        </p>
         {% else %}
         <p></p>
-        <p>로그인</p>
-        <p class="page2">회원가입</p>
+        <p><a href="{% url 'accounts:login' %}">로그인</a></p>
+        <p class="page2"><a href="{% url 'accounts:signup' %}">회원가입</a></p>
         {% endif %}
       </div>
     </header>
