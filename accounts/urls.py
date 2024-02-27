@@ -12,4 +12,6 @@ urlpatterns = [
     path("logout/", views.logout, name="logout"),
     path('password/', views.change_pw, name='change_pw'),
     path('delete/', views.delete, name='delete'),
+    # path('summernote/', include('django_summernote.urls')), 
+
 ]

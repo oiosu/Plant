@@ -1,19 +1,17 @@
 {% extends 'base.html' %} {% block content %}
-<div>
+<div class="article_index_section">
   <button type="button"><a href="{% url 'articles:create' %}">now</a></button>
 </div>
 
 {% if request.user.is_authenticated %} {% endif %} {% for article in articles %}
-<div>
-  <div>
-    <div>
+
       <div>
         <a href="{% url 'articles:detail' article.pk %} ">{{ article.title}}</a>
         <p>{{ article.created_at }}</p>
       </div>
-      <p>{{ article.title }}</p>
-    </div>
-  </div>
-
+      <div>
+        <p>{{ article.title }}</p>
+      </div>
+-
   {% endfor %} {% endblock %}
 </div>

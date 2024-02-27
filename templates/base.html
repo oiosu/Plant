@@ -7,11 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Sukyung" />
     <!-- main -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?after" />
     <!-- articles -->
-    <link rel="stylesheet" href="{% static 'css/articles_index.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/articles_new.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/articles_list.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/articles_index.css' %}?after" />
+    <!-- accounts -->
+    <link rel="stylesheet" href="{% static 'css/accounts_login.css' %}?after" />
+    <link
+      rel="stylesheet"
+      href="{% static 'css/accounts_signup.css' %}?after"
+    />
+
     <!-- note -->
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -50,10 +55,8 @@
       <div class="nav">
         {% if user.is_authenticated %}
         <p class="welcome_msg">Welcome! {{ user.username }}!</p>
-        <p>로그아웃</p>
-        <p class="page1">
-          <a href="{% url 'accounts:detail' %}">마이페이지</a>
-        </p>
+        <p><a href="{% url 'accounts:logout' %}">로그아웃</a></p>
+        <p class="page1">마이페이지</p>
         {% else %}
         <p></p>
         <p><a href="{% url 'accounts:login' %}">로그인</a></p>
